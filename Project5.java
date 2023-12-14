@@ -1,47 +1,65 @@
 import java.util.Scanner;
 
-public class Game {
-
+public class AdventureGame {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Welcome to the Simple Story Game!");
-        System.out.print("Enter your character's name: ");
-        String playerName = scanner.nextLine();
+        System.out.println("Welcome to the Adventure of the Lost Artifact!");
+        System.out.println("You are a young boy named Alex, and you have heard legends of a powerful artifact hidden in the mystical Forest of Shadows.");
 
-        System.out.println("\nHello, " + playerName + "! Your adventure begins...");
+        while (true) {
+            System.out.println("\nChoose your path, Alex:");
+            System.out.println("1. Take the winding trail through the Enchanted Meadow");
+            System.out.println("2. Brave the treacherous Caves of Echoes");
+            System.out.println("3. Seek the guidance of the Wise Old Sage");
 
-        // Start of the story
-        System.out.println("\nYou find yourself in a small village. The village elder approaches you.");
-        System.out.println("Elder: " + playerName + ", we need your help. A dragon has been terrorizing our lands.");
+            int choice = getUserChoice(scanner, 3);
 
-        // Player makes a choice
-        System.out.print("Will you accept the quest to defeat the dragon? (yes/no): ");
-        String choice = scanner.nextLine().toLowerCase();
-
-        if (choice.equals("yes")) {
-            System.out.println("\nYou bravely accept the quest and set off to find the dragon.");
-            System.out.println("After a long journey, you reach the dragon's lair.");
-
-            // Player faces the dragon
-            System.out.println("\nThe dragon is sleeping. You see a sword nearby.");
-            System.out.print("Will you try to sneak past the dragon or attempt to slay it with the sword? (sneak/slay): ");
-            String action = scanner.nextLine().toLowerCase();
-
-            if (action.equals("sneak")) {
-                System.out.println("\nYou successfully sneak past the dragon and find a treasure chest.");
-                System.out.println("Congratulations, " + playerName + "! You have completed the quest!");
-            } else if (action.equals("slay")) {
-                System.out.println("\nYou wake the dragon, and it breathes fire at you!");
-                System.out.println("Unfortunately, you did not survive. Game over.");
-            } else {
-                System.out.println("\nInvalid choice. The dragon wakes up, and you become its snack. Game over.");
+            switch (choice) {
+                case 1:
+                    System.out.println("You chose to take the winding trail through the Enchanted Meadow.");
+                    System.out.println("As you stroll through the meadow, you encounter magical creatures who offer you a magical map.");
+                    System.out.println("The map guides you safely through the forest, avoiding dangers.");
+                    System.out.println("You find the entrance to the hidden cavern containing the artifact.");
+                    break;
+                case 2:
+                    System.out.println("You decide to brave the treacherous Caves of Echoes.");
+                    System.out.println("Inside the dark caves, you face challenges and mysterious echoes that disorient you.");
+                    System.out.println("With careful navigation, you discover a secret passage leading to the artifact.");
+                    break;
+                case 3:
+                    System.out.println("You choose to seek the guidance of the Wise Old Sage.");
+                    System.out.println("The sage imparts ancient wisdom and warns you of the Forest Guardian.");
+                    System.out.println("With this knowledge, you successfully outwit the guardian and reach the artifact.");
+                    break;
             }
 
-        } else {
-            System.out.println("\nYou decline the quest. The village is disappointed, and you live a quiet life. The end.");
+            System.out.println("Congratulations, Alex! You have found the legendary artifact. Game over.");
+            break;
         }
 
         scanner.close();
+    }
+
+    private static int getUserChoice(Scanner scanner, int maxChoice) {
+        int choice = 0;
+        boolean validInput = false;
+
+        do {
+            System.out.print("Enter your choice (1-" + maxChoice + "): ");
+            if (scanner.hasNextInt()) {
+                choice = scanner.nextInt();
+                if (choice >= 1 && choice <= maxChoice) {
+                    validInput = true;
+                } else {
+                    System.out.println("Invalid input. Please enter a number between 1 and " + maxChoice + ".");
+                }
+            } else {
+                System.out.println("Invalid input. Please enter a valid number.");
+                scanner.next(); // consume the invalid input
+            }
+        } while (!validInput);
+
+        return choice;
     }
 }
